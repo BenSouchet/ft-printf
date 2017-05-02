@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 18:37:46 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/01 20:37:25 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/02 20:29:25 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 # include <errno.h>
+# include <stdio.h>
 
 /*
 ** -------------------------- Macros Definition --------------------------------
@@ -132,7 +133,7 @@ int						ft_printf_putwstr(wchar_t *s);
 ** --------------------------- Bonus Functions ----------------------------------
 */
 
-int						print_pointer_address(t_printf *p);
+void					print_pointer_address(t_printf *p);
 char					*color(t_printf *p);
 void					pf_putdouble(t_printf *p);
 char					*pf_ldtoa(double n, t_printf *p);

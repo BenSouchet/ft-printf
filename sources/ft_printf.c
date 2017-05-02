@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 19:18:44 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/01 20:14:50 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/02 20:32:28 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char			*conversion_specifier(t_printf *p)
 			pf_wide_string(p) : pf_string(p);
 	if (*p->format == 'S')
 		p->len += pf_wide_string(p);
-	(*p->format == 'p') ? p->len += print_pointer_address(p) : 0;
+	(*p->format == 'p') ? print_pointer_address(p) : 0;
 	(*p->format == 'n') ? *va_arg(p->ap, int *) = p->len : 0;
 	(*p->format == 'm') ? p->len += ft_printf_putstr(strerror(errno), p) : 0;
 	if (*p->format == 'f' || *p->format == 'F')
@@ -75,7 +75,7 @@ char			*conversion_specifier(t_printf *p)
 	return (p->format);
 }
 
-int				print_pointer_address(t_printf *p)
+void			print_pointer_address(t_printf *p)
 {
 	int		sp_padding;
 	void	*pointer;
@@ -83,16 +83,18 @@ int				print_pointer_address(t_printf *p)
 	pointer = va_arg(p->ap, void *);
 	p->f &= ~F_SHARP;
 	p->min_length -= (p->f & F_ZERO ? 2 : 0);
-	itoa_base_printf((uintmax_t)pointer, 16, p);
-	sp_padding = (p->printed > p->min_length - 2) ? 0 :
-		p->min_length - 2 - p->printed;
+	sp_padding = (p->printed > p->min_length - 3) ? 0 :
+		p->min_length - 3 - p->printed;
 	if (!(p->f & F_MINUS))
-		ft_putnchar(sp_padding, ((p->f & F_ZERO) ? '0' : ' '));
-	ft_putstr("0x");
+		while (sp_padding--)
+			buffer(p, (p->f & F_ZERO) ? "0" : " ", 1);
+	buffer(p, "0x", 2);
+	itoa_base_printf((uintmax_t)pointer, 16, p);
 	/*ft_putstr_free(s);*/
 	if (p->f & F_MINUS)
-		ft_putnchar(sp_padding, ((p->f & F_ZERO) ? '0' : ' '));
-	return (MAX(p->printed + 2, p->min_length));
+		while (sp_padding--)
+			buffer(p, (p->f & F_ZERO) ? "0" : " ", 1);
+	p->len += MAX(p->printed + 2, p->min_length);
 }
 
 void			cs_not_found(t_printf *p)

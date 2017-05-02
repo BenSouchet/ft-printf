@@ -6,7 +6,7 @@
 #    By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/28 18:36:22 by angavrel          #+#    #+#              #
-#    Updated: 2017/05/01 20:39:02 by bsouchet         ###   ########.fr        #
+#    Updated: 2017/05/02 20:08:33 by bsouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,4 +64,4 @@ fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIBFT)
 
-re: fclean all -j 8
+re: fclean all

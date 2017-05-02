@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 19:18:38 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/01 19:49:32 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/02 20:09:28 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 */
 
 # include "libft/libft.h"
-# include "incl/ft_printf.h"
+# include "include/ft_printf.h"
 # include <limits.h>
 # include <stdio.h>
 # include <locale.h>
@@ -723,8 +723,11 @@ j = printf("{%s}", 0);
 
 
 
-		printf("%d\n", 5);
-		ft_printf("%d\n", 5);
+		i = ft_printf("{%05p}", 0);
+	printf(" -> %d for my PF\n", i);
+	j = printf("{%05p}", 0);
+	printf(" -> %d for LIBC PF\n", j);
+
 	//i = ft_printf("Mon printf  : %s\n", "abc");
 //	j = printf("Vrai printf : %x\n", 16);
 //	printf("Moi %d Le vrai : %d\n", i, j);
