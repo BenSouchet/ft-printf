@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 19:18:44 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 17:13:45 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:17:47 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 
 void	print_pointer_address(t_printf *p)
 {
-	void			*pointer;
+	void	*pointer;
 
 	pointer = va_arg(p->ap, void *);
 	p->f &= ~F_SHARP;

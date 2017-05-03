@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 19:16:05 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 16:56:52 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:28:40 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,24 @@ static void	parse_flags(t_printf *p)
 
 	while ((n = ft_strchri("# +-0*", p->format[0], -1)) > -1 && ++p->format)
 		p->f |= (1 << n);
+	((p->f & F_MINUS) && !(p->f & F_WILDCARD)) ? p->f &= ~F_ZERO : 0;
+	(p->f & F_PLUS) ? p->f &= ~F_SPACE : 0;
 	if (p->f & F_WILDCARD)
 	{
 		p->f &= ~F_WILDCARD;
-		p->min_length = (int)va_arg(p->ap, int);
-		p->f = (p->min_length < 0) ? p->f | F_MINUS : p->f & ~F_MINUS;
-		p->min_length = ABS(p->min_length);
-		if (p->f & F_APP_PRECI)
+		if ((n = (int)va_arg(p->ap, int)) < 0)
 		{
-			p->precision = (!(p->f & F_MINUS)) ? p->min_length : 0;
-			p->f = (!p->min_length) ? p->f | F_APP_PRECI : p->f & ~F_APP_PRECI;
+			p->f |= F_MINUS;
+			n = -n;
+		}
+		else
+			p->f &= ~F_MINUS;
+		if (!(p->f & F_APP_PRECI))
+			p->min_length = n;
+		else
+		{
+			p->precision = (!(p->f & F_MINUS)) ? n : 0;
+			p->f = (!n) ? p->f | F_APP_PRECI : p->f & ~F_APP_PRECI;
 		}
 	}
 }
@@ -129,7 +137,7 @@ static void	conversion_specifier(t_printf *p)
 	else if (p->format[0] == 'c' || p->format[0] == 'C')
 		pf_character(p, va_arg(p->ap, unsigned));
 	else if (p->format[0] == 's')
-		(p->f & F_LONG || p->f & F_LONG2) ? pf_putstr(p) : pf_putstr(p);
+		(p->f & F_LONG || p->f & F_LONG2) ? pf_putwstr(p) : pf_putstr(p);
 	else if (p->format[0] == 'S')
 		pf_putwstr(p);
 	else if (p->format[0] == 'p')
@@ -177,7 +185,6 @@ void		parse_optionals(t_printf *p)
 		++p->format;
 	}
 	parse_flags(p);
-	(p->f & F_MINUS) ? p->f &= ~F_ZERO : 0;
 	(p->f & F_PLUS) ? p->f &= ~F_SPACE : 0;
 	if (ft_strchr("CDSUOB", p->format[0]))
 		p->f |= F_LONG;
