@@ -5,25 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/16 15:55:33 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 15:58:26 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 21:38:57 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 21:38:59 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-** bonuses done :
-**   1) *   wildcard_length_modifier
-**   2) n   print_len (refer to ft_printf.c : *va_arg(ap, int *) = p->len;)
-**   3) m   ft_printf_putstr(Strerror(errno), p)
-**   4) {}  color
-**   5) fF  ldtoa
-*/
-
-/*
-** bonus function that handles colors
-*/
 
 void			color(t_printf *p)
 {
@@ -47,14 +34,6 @@ void			color(t_printf *p)
 	p->len += p->printed;
 	--p->format;
 }
-
-/*
-** bonus function that handles float
-** calculates the size of what should be sent to the buffer
-** the decimals are calculated with p->precision
-** decimal is first calculated as the right part, then we multiply it by
-** 10 power p->precision + 1 in order to get the rounding.
-*/
 
 static void		ldtoa_fill(double n, t_printf *p, long value)
 {

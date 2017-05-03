@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wcharlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/21 00:03:43 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 07:42:23 by angavrel         ###   ########.fr       */
+/*   Created: 2017/05/03 22:30:13 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:30:13 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-** returns the number of bytes used by wchar
-*/
 
 size_t	ft_wcharlen(unsigned wc)
 {

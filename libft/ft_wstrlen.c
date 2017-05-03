@@ -5,16 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/20 23:58:17 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 15:18:26 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 22:30:20 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:30:20 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-/*
-** returns the len of a string containing widechars
-*/
 
 size_t		ft_wstrlen(unsigned *s)
 {

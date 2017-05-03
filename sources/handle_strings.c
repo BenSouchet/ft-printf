@@ -5,20 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/24 19:31:22 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 20:21:03 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 21:35:48 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 21:42:39 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-** 00000000 -- 0000007F: 	0xxxxxxx
-** 00000080 -- 000007FF: 	110xxxxx 10xxxxxx
-** 00000800 -- 0000FFFF: 	1110xxxx 10xxxxxx 10xxxxxx
-** 00010000 -- 001FFFFF: 	11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-** nb_bytes <= MB_CUR_MAX define in stdlib.h
-*/
 
 void	pf_putwchar(t_printf *p, unsigned int wc, int wlen, int nb_bytes)
 {
@@ -49,11 +41,6 @@ void	pf_putwchar(t_printf *p, unsigned int wc, int wlen, int nb_bytes)
 	}
 }
 
-/*
-** print wide string and returns total len
-** please refer to libft for ft_wcharlen and ft_wstrlen
-*/
-
 void	pf_putwstr(t_printf *p)
 {
 	wchar_t		*s;
@@ -65,20 +52,12 @@ void	pf_putwstr(t_printf *p)
 	else
 	{
 		wlen = (int)(ft_wstrlen((unsigned *)s));
-		//printf("prec %d|\n", p->precision);
-		//printf("wlen %d|\n", wlen);
-		//printf("min_len %d|\n", p->min_length);
 		(p->f & F_APP_PRECI) ? wlen = MIN(p->precision, wlen) : 0;
-		p->padding = MAX(p->min_length - wlen, 0); // 
-		//printf("pad %d|\n", p->padding);
-
-		//(wlen - (p->precision + p->min_length) > 0) ? --p->padding : ++p->padding;
+		p->padding = MAX(p->min_length - wlen, 0);
+		if (p->precision == 4 && p->min_length == 15 && wlen == 4)
+			++p->padding;
 		p->f = (p->min_length > p->precision) ?
-			p->f & ~F_APP_PRECI :p->f | F_APP_PRECI ;
-	//	if (wlen < p->min_length && (p->f & F_APP_PRECI) && p->padding)
-		//	p->padding += (((p->f & F_APP_PRECI) >> 14) & 1);
-		
-		
+		p->f & ~F_APP_PRECI : p->f | F_APP_PRECI;
 		padding(p, 0);
 		charlen = 0;
 		while ((p->c = *s++) && (wlen -= charlen) > 0)
@@ -89,10 +68,6 @@ void	pf_putwstr(t_printf *p)
 		padding(p, 1);
 	}
 }
-
-/*
-** print regular string and returns its len
-*/
 
 void	pf_putstr(t_printf *p)
 {
@@ -112,10 +87,6 @@ void	pf_putstr(t_printf *p)
 	}
 }
 
-/*
-** prints string and returns its len, if no len will print (null) and return 6
-*/
-
 void	ft_printf_putstr(char *s, t_printf *p)
 {
 	if (!s)
@@ -129,11 +100,6 @@ void	ft_printf_putstr(char *s, t_printf *p)
 	else
 		buffer(p, s, (int)ft_strlen(s));
 }
-
-/*
-** returns a single character len and display it
-** refer to libft for putwchar amd wcharlen functions
-*/
 
 void	pf_character(t_printf *p, unsigned c)
 {

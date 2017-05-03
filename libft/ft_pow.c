@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 19:38:26 by angavrel          #+#    #+#             */
-/*   Updated: 2017/02/16 17:36:52 by angavrel         ###   ########.fr       */
+/*   Created: 2017/05/03 22:28:37 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:28:51 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 double	ft_pow(double n, int pow)
 {

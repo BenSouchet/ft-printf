@@ -5,16 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/28 20:03:13 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 19:00:43 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 21:40:17 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 21:40:41 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-** ft_putnb but for printf (returns len and adds padding)
-*/
 
 void	pf_putnb(t_printf *p)
 {
@@ -36,12 +32,6 @@ void	pf_putnb(t_printf *p)
 	itoa_printf(n, p);
 }
 
-/*
-** put number base will returns len and add the padding
-** a base number is considered as unsigned by printf
-** printf only handle binary, octal and hex.
-*/
-
 void	pf_putnb_base(int base, t_printf *p)
 {
 	uintmax_t	n;
@@ -60,10 +50,6 @@ void	pf_putnb_base(int base, t_printf *p)
 		n = (uintmax_t)va_arg(p->ap, unsigned int);
 	itoa_base_printf(n, base, p);
 }
-
-/*
-** transforms int n into char *s
-*/
 
 void	itoa_printf(intmax_t n, t_printf *p)
 {
@@ -94,10 +80,6 @@ void	itoa_printf(intmax_t n, t_printf *p)
 	padding(p, 1);
 }
 
-/*
-** same as above for any base
-*/
-
 void	itoa_base_printf(uintmax_t n, int b, t_printf *p)
 {
 	uintmax_t	tmp;
@@ -112,7 +94,8 @@ void	itoa_base_printf(uintmax_t n, int b, t_printf *p)
 	ext = (p->printed >= p->precision) ? 0 : 1;
 	p->printed = MAX(p->precision, p->printed);
 	((p->f & F_SHARP) && b == 8 && !ext) ? --p->min_length : 0;
-	((p->f & F_SHARP) && b == 8 && !n && (p->f & F_APP_PRECI)) ? ++p->printed : 0;
+	((p->f & F_SHARP) && b == 8 && !n && (p->f & F_APP_PRECI)) ?
+	++p->printed : 0;
 	((p->f & F_SHARP) && b == 16 && !(p->f & F_ZERO)) ? p->min_length -= 2 : 0;
 	p->padding = MAX(0, (p->min_length - p->printed));
 	padding(p, 0);
@@ -125,12 +108,6 @@ void	itoa_base_printf(uintmax_t n, int b, t_printf *p)
 	buffer(p, s, p->printed);
 	padding(p, 1);
 }
-
-/*
-** variable letter only works for base 16 in printf
-** letter = 'a' - 10 - (p->f & F_LONG) is to get directly the
-** letter with caplock if X was parsed.
-*/
 
 void	itoa_base_fill(uintmax_t tmp, int b, char s[PF_BUF_SIZE], t_printf *p)
 {

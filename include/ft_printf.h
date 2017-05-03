@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/28 18:37:46 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 17:13:18 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 22:30:46 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:30:46 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define ABS(a)			(a < 0) ? -a : a
 # define DABS(a)		(a < 0.0f) ? -a : a
 # define COLOR(s,n)		ft_putstr(s), (p->format += n)
+# define STRERR			strerror
 
 /*
 ** -------------------------- Colors Definition --------------------------------

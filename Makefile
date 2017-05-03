@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/01/28 18:36:22 by angavrel          #+#    #+#              #
-#    Updated: 2017/05/03 15:16:45 by bsouchet         ###   ########.fr        #
+#    Created: 2017/05/03 22:30:54 by bsouchet          #+#    #+#              #
+#    Updated: 2017/05/03 22:30:55 by bsouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,17 +25,16 @@ DIR_O = temporary
 HEADER = include
 
 SOURCES = ft_printf.c \
-		  parsing.c \
-		  number.c \
-		  string.c \
-		  buffer.c \
-		  bonus.c
+		  parse_arguments.c \
+		  handle_numbers.c \
+		  handle_strings.c \
+		  bonus_functions.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
-all: temporary $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
@@ -43,10 +42,8 @@ $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
-temporary:
-	@mkdir -p temporary
-
 $(DIR_O)/%.o: $(DIR_S)/%.c
+	@mkdir -p temporary
 	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 norme:

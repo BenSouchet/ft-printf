@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/02 13:48:13 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 13:43:07 by angavrel         ###   ########.fr       */
+/*   Created: 2017/05/03 22:29:22 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:29:53 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** inspired by https://github.com/lattera/glibc/blob/master/string/strlen.c
-*/
-
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 static const char	*byte_zero(const unsigned long *longword_ptr,
 	unsigned long lomagic, unsigned long himagic)
