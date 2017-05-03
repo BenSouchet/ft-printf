@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 18:29:58 by angavrel          #+#    #+#             */
-/*   Updated: 2017/02/16 19:02:08 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/05/03 15:54:06 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ float				ft_fclamp(float n, float min, float max);
 char				*ft_str2lower(char *s);
 char				*ft_itoa_base(int n, int b);
 double				ft_pow(double n, int pow);
+int					ft_strchri(char *s, int c, int i);
+int					ft_strchri_lu(char *s, int c, int i);
 
 /*
 ** printf functions

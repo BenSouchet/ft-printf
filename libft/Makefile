@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angavrel <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/12 13:55:55 by angavrel          #+#    #+#              #
-#    Updated: 2017/02/14 06:54:09 by angavrel         ###   ########.fr        #
+#    Updated: 2017/05/03 15:54:45 by bsouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC = ft_atoi.c \
 	  ft_strstr.c \
 	  ft_strnstr.c \
 	  ft_strcpy.c \
+	  ft_strchri.c \
 	  ft_strdup.c \
 	  ft_strequ.c \
 	  ft_striter.c \

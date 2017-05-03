@@ -6,7 +6,7 @@
 #    By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/28 18:36:22 by angavrel          #+#    #+#              #
-#    Updated: 2017/05/02 20:08:33 by bsouchet         ###   ########.fr        #
+#    Updated: 2017/05/03 15:16:45 by bsouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,12 @@ DIR_O = temporary
 
 HEADER = include
 
-SOURCES = bonus.c \
-		  buffer.c \
-		  character.c \
-		  ft_printf.c \
-		  number.c \
+SOURCES = ft_printf.c \
 		  parsing.c \
-		  string.c
+		  number.c \
+		  string.c \
+		  buffer.c \
+		  bonus.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

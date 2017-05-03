@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strchri.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/05 19:59:15 by angavrel          #+#    #+#             */
-/*   Updated: 2016/11/09 19:55:30 by angavrel         ###   ########.fr       */
+/*   Created: 2017/05/03 15:52:58 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 15:53:19 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+int		ft_strchri(char *s, int c, int i)
 {
-	if (!big[0] && !little[0])
-		return ((char *)big);
-	return (ft_strnstr(big, little, ft_strlen(big)));
+	while (s[++i])
+		if (s[i] == c)
+			return (i);
+	return (-1);
+}
+
+int		ft_strchri_lu(char *s, int c, int i)
+{
+	i = -1;
+	while (s[++i])
+		if (s[i] == c || s[i] == c + 32)
+			return (i);
+	return (-1);
 }

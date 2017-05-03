@@ -6,27 +6,26 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:55:33 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/01 20:14:38 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/03 15:58:26 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_strchr_index(char *s, int c)
-{
-	int		i;
+/*
+** bonuses done :
+**   1) *   wildcard_length_modifier
+**   2) n   print_len (refer to ft_printf.c : *va_arg(ap, int *) = p->len;)
+**   3) m   ft_printf_putstr(Strerror(errno), p)
+**   4) {}  color
+**   5) fF  ldtoa
+*/
 
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		++i;
-	}
-	return (-1);
-}
+/*
+** bonus function that handles colors
+*/
 
-char	*color(t_printf *p)
+void			color(t_printf *p)
 {
 	p->printed = 5;
 	if (!ft_strncmp(p->format, "{red}", ft_strlen("{red}")))
@@ -46,61 +45,25 @@ char	*color(t_printf *p)
 	else
 		p->printed = 0;
 	p->len += p->printed;
-	return (p->format - 1);
+	--p->format;
 }
 
-void	pf_putdouble(t_printf *p)
-{
-	char		*s;
-	double		n;
+/*
+** bonus function that handles float
+** calculates the size of what should be sent to the buffer
+** the decimals are calculated with p->precision
+** decimal is first calculated as the right part, then we multiply it by
+** 10 power p->precision + 1 in order to get the rounding.
+*/
 
-	n = (double)va_arg(p->ap, double);
-	(p->f & F_ZERO) ? p->precision = p->min_length : 0;
-	s = pf_ldtoa(n, p);
-	/*ft_putstr_free(s);*/
-	p->len += MAX(p->printed, p->min_length);
-}
-
-char	*pf_ldtoa(double n, t_printf *p)
-{
-	long		tmp;
-	char		*s;
-	int			len;
-	
-	if (!(p->f & F_APP_PRECI))
-		p->precision = 6;
-	len = (p->precision > 0) ? 1 : 0;
-	tmp = (long)(ABS(n));
-	while (tmp)
-	{
-		tmp /= 10;
-		++len;
-	}
-	(p->f & F_ZERO) ? p->precision = p->min_length : 0;
-	p->printed = p->precision + len + ((n < 0) ? 1 : 0);
-	if (!(s = (char*)malloc(sizeof(char) * (p->printed + 1))))
-		return (NULL);
-	ldtoa_fill(n, s, p);
-	(p->f & F_SPACE) ? s[0] = ' ' : 0;
-	(n < 0) ? s[0] = '-' : 0;
-	(p->f & F_PLUS && n >= 0) ? s[0] = '+' : 0;
-	return (s);
-}
-
-void	ldtoa_fill(double n, char *s, t_printf *p)
+static void		ldtoa_fill(double n, t_printf *p, long value)
 {
 	int		len;
 	int		accuracy;
-	double	decimal;
-	long	value;
+	char	s[48];
 
-	decimal = ABS(n);
-	decimal = (decimal - (long)(ABS(n))) * ft_pow(10, p->precision + 1);
-	decimal = ((long)decimal % 10 > 4) ? (decimal) / 10 + 1 : decimal / 10;
 	len = p->printed - 1 - p->precision;
 	accuracy = p->printed - 1 - len;
-	s[p->printed] = '\0';
-	value = (int)decimal;
 	while (accuracy--)
 	{
 		s[len + accuracy + 1] = value % 10 + '0';
@@ -108,10 +71,40 @@ void	ldtoa_fill(double n, char *s, t_printf *p)
 	}
 	(p->precision > 0) ? s[len] = '.' : 0;
 	value = (long)(ABS(n));
-	while (len--)
+	while (++accuracy < len)
 	{
-		s[len] = value % 10 + '0';
+		s[len - accuracy - 1] = value % 10 + '0';
 		value /= 10;
 	}
 	(p->f & F_APP_PRECI && p->f & F_ZERO) ? s[0] = ' ' : 0;
+	(p->f & F_SPACE) ? s[0] = ' ' : 0;
+	(n < 0) ? s[0] = '-' : 0;
+	(p->f & F_PLUS && n >= 0) ? s[0] = '+' : 0;
+	buffer(p, s, len + 1 + 6);
+}
+
+void			pf_putdouble(t_printf *p)
+{
+	double		n;
+	long		tmp;
+	int			len;
+	double		decimal;
+	long		value;
+
+	n = (double)va_arg(p->ap, double);
+	(p->f & F_ZERO) ? p->precision = p->min_length : 0;
+	if (!(p->f & F_APP_PRECI))
+		p->precision = 6;
+	len = (p->precision > 0) ? 1 : 0;
+	tmp = (long)(ABS(n));
+	while (tmp && ++len)
+		tmp /= 10;
+	(p->f & F_ZERO) ? p->precision = p->min_length : 0;
+	p->printed = p->precision + len + ((n < 0) ? 1 : 0);
+	decimal = ((n < 0.0f) ? -n : n);
+	decimal = (decimal - (long)(((n < 0.0f) ? -n : n))) *
+	ft_pow(10, p->precision + 1);
+	decimal = ((long)decimal % 10 > 4) ? (decimal) / 10 + 1 : decimal / 10;
+	value = (int)decimal;
+	ldtoa_fill(n, p, value);
 }

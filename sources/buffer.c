@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/01 00:02:06 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/01 20:14:41 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/03 15:17:33 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,5 @@ void		buffer(t_printf *p, void *new, size_t size)
 	}
 	ft_memcpy(&(p->buff[p->buffer_index]), &(new[new_i]), size);
 	p->buffer_index += size;
-//	p->len += size;
-}
-
-void		buffer_flush(t_printf *p)
-{
-    write(p->fd, p->buff, p->buffer_index);
+	p->len += size;
 }
