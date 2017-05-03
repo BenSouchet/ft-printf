@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 20:03:13 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 18:38:10 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/03 19:00:43 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	itoa_base_printf(uintmax_t n, int b, t_printf *p)
 	ext = (p->printed >= p->precision) ? 0 : 1;
 	p->printed = MAX(p->precision, p->printed);
 	((p->f & F_SHARP) && b == 8 && !ext) ? --p->min_length : 0;
+	((p->f & F_SHARP) && b == 8 && !n && (p->f & F_APP_PRECI)) ? ++p->printed : 0;
 	((p->f & F_SHARP) && b == 16 && !(p->f & F_ZERO)) ? p->min_length -= 2 : 0;
 	p->padding = MAX(0, (p->min_length - p->printed));
 	padding(p, 0);
@@ -135,7 +136,8 @@ void	itoa_base_fill(uintmax_t tmp, int b, char s[PF_BUF_SIZE], t_printf *p)
 {
 	int		len;
 
-	if (tmp && !(p->f & F_POINTER) && (p->f & F_SHARP) && b == 16 && !(p->f & F_LONG2) && p->printed > 3)
+	if (tmp && !(p->f & F_POINTER) && (p->f & F_ZERO) && (p->f & F_SHARP) &&
+	b == 16 && !(p->f & F_LONG2) && p->printed > 3)
 		p->printed -= 2;
 	len = p->printed;
 	p->c = 'a' - 10 - ((p->f & F_UPCASE) >> 1);

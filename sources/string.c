@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 19:31:22 by angavrel          #+#    #+#             */
-/*   Updated: 2017/05/03 18:11:19 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/03 20:21:03 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,20 @@ void	pf_putwstr(t_printf *p)
 	else
 	{
 		wlen = (int)(ft_wstrlen((unsigned *)s));
+		//printf("prec %d|\n", p->precision);
+		//printf("wlen %d|\n", wlen);
+		//printf("min_len %d|\n", p->min_length);
 		(p->f & F_APP_PRECI) ? wlen = MIN(p->precision, wlen) : 0;
-		p->padding = MAX(p->min_length - wlen, 0);
+		p->padding = MAX(p->min_length - wlen, 0); // 
+		//printf("pad %d|\n", p->padding);
+
+		//(wlen - (p->precision + p->min_length) > 0) ? --p->padding : ++p->padding;
 		p->f = (p->min_length > p->precision) ?
-			p->f & ~F_APP_PRECI : p->f | F_APP_PRECI;
+			p->f & ~F_APP_PRECI :p->f | F_APP_PRECI ;
+	//	if (wlen < p->min_length && (p->f & F_APP_PRECI) && p->padding)
+		//	p->padding += (((p->f & F_APP_PRECI) >> 14) & 1);
+		
+		
 		padding(p, 0);
 		charlen = 0;
 		while ((p->c = *s++) && (wlen -= charlen) > 0)
