@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 22:30:46 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/04 21:10:02 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/06 01:22:12 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define MIN(a, b)		a & ((a - b) >> 31) | b & (~(a - b) >> 31)
 # define ABS(a)			(a < 0) ? -a : a
 # define DABS(a)		(a < 0.0f) ? -a : a
-# define COLOR(s,n)		ft_putstr(s), (p->format += n)
 # define STRERR			strerror
 
 /*
@@ -75,6 +74,7 @@ typedef struct			s_printf
 {
 	int					len;
 	short				f;
+	short				n;
 	int					min_length;
 	int					precision;
 	int					padding;
@@ -109,7 +109,7 @@ void					cs_not_found(t_printf *p);
 
 void					pf_putnb(t_printf *p);
 void					pf_putnb_base(int base, t_printf *p);
-void					itoa_printf(intmax_t d, t_printf *p);
+void					itoa_printf(intmax_t d, t_printf *p, int len);
 void					itoa_base_printf(uintmax_t d, int b, t_printf *p);
 void					itoa_base_fill(uintmax_t tmp, int base, char *str,
 						t_printf *p);

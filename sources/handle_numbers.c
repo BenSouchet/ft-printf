@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   number.c                                           :+:      :+:    :+:   */
+/*   handle_numbers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 21:40:17 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 21:40:41 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/06 01:39:50 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	pf_putnb(t_printf *p)
 	else
 		n = ((intmax_t)va_arg(p->ap, int));
 	(p->f & F_ZERO) ? p->precision = p->min_length : 0;
-	itoa_printf(n, p);
+	itoa_printf(n, p, 0);
 }
 
 void	pf_putnb_base(int base, t_printf *p)
@@ -51,13 +51,11 @@ void	pf_putnb_base(int base, t_printf *p)
 	itoa_base_printf(n, base, p);
 }
 
-void	itoa_printf(intmax_t n, t_printf *p)
+void	itoa_printf(intmax_t n, t_printf *p, int len)
 {
 	char		s[21];
-	int			len;
 	uintmax_t	tmp;
 
-	len = 0;
 	tmp = ABS(n);
 	while (tmp)
 	{

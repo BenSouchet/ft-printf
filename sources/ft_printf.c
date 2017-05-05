@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 21:39:39 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 21:53:53 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/06 01:40:37 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,17 @@ int		ft_printf(const char *format, ...)
 	p.fd = 1;
 	p.format = (char *)format;
 	va_start(p.ap, format);
-	while (p.format[0])
+	while (*p.format)
 	{
-		if (p.format[0] == '%')
+		if (*p.format == '%')
 		{
 			++p.format;
-			if (!p.format[0] || (p.format[0] == ' ' && (!p.format[1]
-			|| (!p.format[2] && p.format[1] == 'h'))))
+			if (!*p.format)
 				break ;
-			else
-				parse_optionals(&p);
+			parse_optionals(&p);
 		}
 		else
-			buffer(&p, &p.format[0], 1);
+			buffer(&p, p.format, 1);
 		++p.format;
 	}
 	write(p.fd, p.buff, p.buffer_index);
@@ -48,19 +46,17 @@ int		ft_dprintf(int fd, const char *format, ...)
 	p.fd = fd;
 	p.format = (char *)format;
 	va_start(p.ap, format);
-	while (p.format[0])
+	while (*p.format)
 	{
-		if (p.format[0] == '%')
+		if (*p.format == '%')
 		{
 			++p.format;
-			if (!p.format[0] || (p.format[0] == ' ' && (!p.format[1]
-			|| (!p.format[2] && p.format[1] == 'h'))))
+			if (!*p.format)
 				break ;
-			else
-				parse_optionals(&p);
+			parse_optionals(&p);
 		}
 		else
-			buffer(&p, &p.format[0], 1);
+			buffer(&p, p.format, 1);
 		++p.format;
 	}
 	write(p.fd, p.buff, p.buffer_index);
@@ -106,14 +102,13 @@ void	print_pointer_address(t_printf *p)
 
 void	padding(t_printf *p, int n)
 {
-	if (p->padding)
-	{
-		p->c = 32 | (p->f & F_ZERO);
-		if (!n && !(p->f & F_MINUS))
-			while (p->padding--)
-				buffer(p, &p->c, 1);
-		else if (n && (p->f & F_MINUS))
-			while (p->padding--)
-				buffer(p, &p->c, 1);
-	}
+	if (!p->padding)
+		return ;
+	p->c = 32 | (p->f & F_ZERO);
+	if (!n && !(p->f & F_MINUS))
+		while (p->padding--)
+			buffer(p, &p->c, 1);
+	else if (n && (p->f & F_MINUS))
+		while (p->padding--)
+			buffer(p, &p->c, 1);
 }

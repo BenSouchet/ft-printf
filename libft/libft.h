@@ -6,61 +6,28 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 22:28:00 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/05 19:42:25 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/05 22:46:09 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define LBITS 0x101010101010101L
+# define HBITS 0x8080808080808080L
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
 
-typedef enum		e_bool
-{
-	True, False
-}					t_bool;
-
-typedef struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
-
-typedef struct		s_rgb
-{
-	float			r;
-	float			g;
-	float			b;
-}					t_rgb;
-
-typedef struct		s_hsb
-{
-	float			h;
-	float			s;
-	float			b;
-}					t_hsb;
-
-typedef struct		s_vector
-{
-	float			x;
-	float			y;
-	float			z;
-	float			w;
-}					t_vector;
-
 int					ft_atoi(char *str);
 void				ft_bzero(void *s, size_t n);
 
-void				*ft_memchr(const void *s, int c, size_t n);
+void				*ft_memchr(const void *mem, const unsigned char c,
+					size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memset(void *s, int c, size_t n);
 
 double				ft_pow(double n, int pow);
-
-void				ft_putstr(const char *str);
 
 char				*ft_strchr(const char *s, int c);
 int					ft_strchri(char *s, int c, int i);

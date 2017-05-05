@@ -6,7 +6,7 @@
 #    By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 22:27:50 by bsouchet          #+#    #+#              #
-#    Updated: 2017/05/03 22:27:53 by bsouchet         ###   ########.fr        #
+#    Updated: 2017/05/05 22:48:26 by bsouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRC = ft_atoi.c \
 	  ft_memcpy.c \
 	  ft_memset.c \
 	  ft_pow.c \
-	  ft_putstr.c \
 	  ft_strchr.c \
 	  ft_strchri.c \
 	  ft_strlen.c \
