@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 21:36:51 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/05 19:42:06 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:46:36 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	field_width_precision(t_printf *p)
 
 static void	conversion_specifier(t_printf *p)
 {
-	//p->printed = 0;
 	p->c = *p->format;
 	if (p->c == 's')
 		(p->f & F_LONG || p->f & F_LONG2) ? pf_putwstr(p) : pf_putstr(p);

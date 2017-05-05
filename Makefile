@@ -6,7 +6,7 @@
 #    By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 22:30:54 by bsouchet          #+#    #+#              #
-#    Updated: 2017/05/03 22:30:55 by bsouchet         ###   ########.fr        #
+#    Updated: 2017/05/05 19:49:03 by bsouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,11 @@ $(DIR_O)/%.o: $(DIR_S)/%.c
 	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 norme:
-	norminette ../libft/$(HEADER)
+	norminette ./libft/
 	@echo
-	norminette ../libft/$(DIR_S)
+	norminette ./$(HEADER)/
+	@echo
+	norminette ./$(DIR_S)/
 
 clean:
 	@rm -f $(OBJS)

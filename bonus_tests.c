@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 19:23:20 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/05 19:20:16 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:50:27 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int		main(void)
 	ft_printf("\n- - - - - - - %%n Tests - - - - - - -\n\n");
 	ft_printf("Original printf (<stdio.h>)  :\n");
 	printf("Hello World %n\n", &val);
-	printf("Characters printed so far = %d\n\n",val);
+	printf("Characters printed so far = %d\n\n", val);
 	ft_printf("My own Printf (ft_printf)    :\n");
 	ft_printf("Hello World %n\n", &val);
-	ft_printf("Characters printed so far = %d\n\n",val);
+	ft_printf("Characters printed so far = %d\n\n", val);
 	ft_printf("\n");
 	ft_printf("Original printf (<stdio.h>)  :\n");
 	printf("test %nusing %%n flag\n", &val);
@@ -92,5 +92,6 @@ int		main(void)
 	ft_printf("My own printf (ft_printf) :\n");
 	ft_printf("%{red}OMG BrO'!%{eoc} %{green}420 Blaze iT%{eoc} %{yellow}in your Face!%{eoc}\n");
 	ft_printf("%{blue}O BABY A TRIPLE!%{eoc} %{purple}FATALITY!%{eoc} %{cyan}U MAD BRO%{eoc}\n");
+	ft_printf("- Test after reset of basic color! -\n\n");
 	return (1);
 }

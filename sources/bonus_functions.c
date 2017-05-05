@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 21:38:57 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/05 19:19:44 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:46:59 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void			color(t_printf *p)
 		p->printed = 0;
 	p->format += len - 1;
 	p->len += p->printed;
-	//--p->format;
 }
 
 static void		ldtoa_fill(double n, t_printf *p, long value)
