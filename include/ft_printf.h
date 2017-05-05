@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 22:30:46 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 22:30:46 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/04 21:10:02 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define PF_BLUE		"\033[34m"
 # define PF_PURPLE		"\033[35m"
 # define PF_CYAN		"\033[36m"
-# define PF_EOC			"\033[36m"
+# define PF_EOC			"\033[0m"
 
 /*
 ** --------------------------- Masks Definition --------------------------------
@@ -133,17 +133,12 @@ void					color(t_printf *p);
 void					pf_putdouble(t_printf *p);
 
 /*
-** --------------------------- Misc Functions ----------------------------------
-*/
-
-void					buffer(t_printf *p, void *new_elem, size_t size);
-void					padding(t_printf *p, int n);
-
-/*
 ** --------------------------- Buffer Functions --------------------------------
 */
 
 void					buffer(t_printf *p, void *new_elem, size_t size);
 void					buffer_flush(t_printf *p);
+
+void					padding(t_printf *p, int n);
 
 #endif

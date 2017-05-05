@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus.c                                            :+:      :+:    :+:   */
+/*   bonus_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 21:38:57 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 21:38:59 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:19:44 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 void			color(t_printf *p)
 {
+	int len;
+
 	p->printed = 5;
-	if (!ft_strncmp(p->format, "{red}", ft_strlen("{red}")))
-		COLOR(PF_RED, 5);
-	else if (!ft_strncmp(p->format, "{green}", ft_strlen("{green}")))
-		COLOR(PF_GREEN, 7);
-	else if (!ft_strncmp(p->format, "{yellow}", ft_strlen("{yellow}")))
-		COLOR(PF_YELLOW, 8);
-	else if (!ft_strncmp(p->format, "{blue}", ft_strlen("{blue}")))
-		COLOR(PF_BLUE, 6);
-	else if (!ft_strncmp(p->format, "{purple}", ft_strlen("{purple}")))
-		COLOR(PF_PURPLE, 8);
-	else if (!ft_strncmp(p->format, "{cyan}", ft_strlen("{cyan}")))
-		COLOR(PF_CYAN, 6);
-	else if (!ft_strncmp(p->format, "{eoc}", ft_strlen("{eoc}")))
-		COLOR(PF_EOC, 5);
-	else
+	if (!ft_strncmp(p->format, "{red}", (len = 5)))
+		buffer(p, PF_RED, p->printed);
+	else if (!ft_strncmp(p->format, "{green}", (len = 7)))
+		buffer(p, PF_GREEN, p->printed);
+	else if (!ft_strncmp(p->format, "{yellow}", (len = 8)))
+		buffer(p, PF_YELLOW, p->printed);
+	else if (!ft_strncmp(p->format, "{blue}", (len = 6)))
+		buffer(p, PF_BLUE, p->printed);
+	else if (!ft_strncmp(p->format, "{purple}", (len = 8)))
+		buffer(p, PF_PURPLE, p->printed);
+	else if (!ft_strncmp(p->format, "{cyan}", (len = 6)))
+		buffer(p, PF_CYAN, p->printed);
+	else if (!ft_strncmp(p->format, "{eoc}", (len = 5)))
+		buffer(p, PF_EOC, --p->printed);
+	else if (!(len = 0))
 		p->printed = 0;
+	p->format += len - 1;
 	p->len += p->printed;
-	--p->format;
+	//--p->format;
 }
 
 static void		ldtoa_fill(double n, t_printf *p, long value)

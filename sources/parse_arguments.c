@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 21:36:51 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 21:53:26 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/05/05 19:42:06 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,27 @@ static void	field_width_precision(t_printf *p)
 
 static void	conversion_specifier(t_printf *p)
 {
-	p->printed = 0;
-	if (ft_strchr("oOuUbBxX", p->format[0]))
-		pf_putnb_base(ft_strchri_lu(".b..ou..x", p->format[0], -1) << 1, p);
-	else if (ft_strchr("dDi", p->format[0]))
-		pf_putnb(p);
-	else if (p->format[0] == 'c' || p->format[0] == 'C')
-		pf_character(p, va_arg(p->ap, unsigned));
-	else if (p->format[0] == 's')
+	//p->printed = 0;
+	p->c = *p->format;
+	if (p->c == 's')
 		(p->f & F_LONG || p->f & F_LONG2) ? pf_putwstr(p) : pf_putstr(p);
-	else if (p->format[0] == 'S')
-		pf_putwstr(p);
-	else if (p->format[0] == 'p')
-		print_pointer_address(p);
-	else if (p->format[0] == 'n')
-		*va_arg(p->ap, int *) = p->len;
-	else if (p->format[0] == 'm')
-		ft_printf_putstr(STRERR(errno), p);
-	else if (p->format[0] == 'f' || p->format[0] == 'F')
+	else if (ft_strchr("dDi", p->c))
+		pf_putnb(p);
+	else if (p->c == 'f' || p->c == 'F')
 		(p->f & F_APP_PRECI && !p->precision) ? pf_putnb(p) : pf_putdouble(p);
-	else if (p->format[0] == '{')
+	else if (ft_strchr("oOuUbBxX", p->c))
+		pf_putnb_base(ft_strchri_lu(".b..ou..x", p->c, -1) << 1, p);
+	else if (p->c == 'c' || p->c == 'C')
+		pf_character(p, va_arg(p->ap, unsigned));
+	else if (p->c == 'S')
+		pf_putwstr(p);
+	else if (p->c == 'p')
+		print_pointer_address(p);
+	else if (p->c == 'n')
+		*va_arg(p->ap, int *) = p->len;
+	else if (p->c == 'm')
+		ft_printf_putstr(STRERR(errno), p);
+	else if (p->c == '{')
 		color(p);
 	else
 		cs_not_found(p);
